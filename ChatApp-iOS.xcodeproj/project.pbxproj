@@ -9,12 +9,14 @@
 /* Begin PBXBuildFile section */
 		2950E57725147E6200E7621C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2950E57625147E6200E7621C /* AppDelegate.swift */; };
 		2950E57925147E6200E7621C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2950E57825147E6200E7621C /* SceneDelegate.swift */; };
-		2950E57B25147E6200E7621C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2950E57A25147E6200E7621C /* ViewController.swift */; };
+		2950E57B25147E6200E7621C /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2950E57A25147E6200E7621C /* ChatViewController.swift */; };
 		2950E57E25147E6200E7621C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2950E57C25147E6200E7621C /* Main.storyboard */; };
 		2950E58025147E6300E7621C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2950E57F25147E6300E7621C /* Assets.xcassets */; };
 		2950E58325147E6300E7621C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2950E58125147E6300E7621C /* LaunchScreen.storyboard */; };
 		2950E58E25147E6400E7621C /* ChatApp_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2950E58D25147E6400E7621C /* ChatApp_iOSTests.swift */; };
 		2950E59925147E6400E7621C /* ChatApp_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2950E59825147E6400E7621C /* ChatApp_iOSUITests.swift */; };
+		2950E5B9251485F000E7621C /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2950E5B8251485F000E7621C /* SignUpViewController.swift */; };
+		2950E5C12514860400E7621C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2950E5C02514860400E7621C /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +40,7 @@
 		2950E57325147E6200E7621C /* ChatApp-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ChatApp-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2950E57625147E6200E7621C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2950E57825147E6200E7621C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		2950E57A25147E6200E7621C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2950E57A25147E6200E7621C /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		2950E57D25147E6200E7621C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2950E57F25147E6300E7621C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2950E58225147E6300E7621C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +51,8 @@
 		2950E59425147E6400E7621C /* ChatApp-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ChatApp-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2950E59825147E6400E7621C /* ChatApp_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatApp_iOSUITests.swift; sourceTree = "<group>"; };
 		2950E59A25147E6400E7621C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2950E5B8251485F000E7621C /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		2950E5C02514860400E7621C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,12 +103,11 @@
 		2950E57525147E6200E7621C /* ChatApp-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				2950E57625147E6200E7621C /* AppDelegate.swift */,
-				2950E57825147E6200E7621C /* SceneDelegate.swift */,
-				2950E57A25147E6200E7621C /* ViewController.swift */,
-				2950E57C25147E6200E7621C /* Main.storyboard */,
-				2950E57F25147E6300E7621C /* Assets.xcassets */,
-				2950E58125147E6300E7621C /* LaunchScreen.storyboard */,
+				2950E5B02514836000E7621C /* Resources */,
+				2950E5AF2514833400E7621C /* ViewModels */,
+				2950E5AE2514832800E7621C /* Models */,
+				2950E5AD2514831A00E7621C /* Views */,
+				2950E5AC251482FF00E7621C /* Controllers */,
 				2950E58425147E6300E7621C /* Info.plist */,
 			);
 			path = "ChatApp-iOS";
@@ -126,6 +129,57 @@
 				2950E59A25147E6400E7621C /* Info.plist */,
 			);
 			path = "ChatApp-iOSUITests";
+			sourceTree = "<group>";
+		};
+		2950E5AC251482FF00E7621C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2950E57A25147E6200E7621C /* ChatViewController.swift */,
+				2950E5B8251485F000E7621C /* SignUpViewController.swift */,
+				2950E5C02514860400E7621C /* LoginViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		2950E5AD2514831A00E7621C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2950E5B4251483BF00E7621C /* Storyboards */,
+				2950E57F25147E6300E7621C /* Assets.xcassets */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2950E5AE2514832800E7621C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2950E5AF2514833400E7621C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		2950E5B02514836000E7621C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2950E57625147E6200E7621C /* AppDelegate.swift */,
+				2950E57825147E6200E7621C /* SceneDelegate.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		2950E5B4251483BF00E7621C /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				2950E57C25147E6200E7621C /* Main.storyboard */,
+				2950E58125147E6300E7621C /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,8 +312,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2950E57B25147E6200E7621C /* ViewController.swift in Sources */,
+				2950E57B25147E6200E7621C /* ChatViewController.swift in Sources */,
 				2950E57725147E6200E7621C /* AppDelegate.swift in Sources */,
+				2950E5B9251485F000E7621C /* SignUpViewController.swift in Sources */,
+				2950E5C12514860400E7621C /* LoginViewController.swift in Sources */,
 				2950E57925147E6200E7621C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -439,6 +495,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K7W3JUDYQP;
 				INFOPLIST_FILE = "ChatApp-iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -458,6 +515,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K7W3JUDYQP;
 				INFOPLIST_FILE = "ChatApp-iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
