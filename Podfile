@@ -5,15 +5,8 @@ target 'ChatApp-iOS' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for ChatApp-iOS
-
-  target 'ChatApp-iOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-  target 'ChatApp-iOSUITests' do
-    # Pods for testing
-  end
+pod 'Firebase/Core'
+pod 'Firebase/Database'
+pod 'Firebase/Auth'
 
 end

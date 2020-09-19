@@ -1,0 +1,6 @@
+framework module Pods_ChatApp_iOS {
+  umbrella header "Pods-ChatApp-iOS-umbrella.h"
+
+  export *
+  module * { export * }
+}
