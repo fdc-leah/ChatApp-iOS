@@ -18,8 +18,6 @@
 		2950E57E25147E6200E7621C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2950E57C25147E6200E7621C /* Main.storyboard */; };
 		2950E58025147E6300E7621C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2950E57F25147E6300E7621C /* Assets.xcassets */; };
 		2950E58325147E6300E7621C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2950E58125147E6300E7621C /* LaunchScreen.storyboard */; };
-		2950E58E25147E6400E7621C /* ChatApp_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2950E58D25147E6400E7621C /* ChatApp_iOSTests.swift */; };
-		2950E59925147E6400E7621C /* ChatApp_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2950E59825147E6400E7621C /* ChatApp_iOSUITests.swift */; };
 		2950E5C12514860400E7621C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2950E5C02514860400E7621C /* LoginViewController.swift */; };
 		2950E6162514A94A00E7621C /* SignUpLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2950E6152514A94A00E7621C /* SignUpLoginViewController.swift */; };
 		29ADFC752514E5E10070C1E5 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29ADFC742514E5E10070C1E5 /* Utils.swift */; };
@@ -57,11 +55,7 @@
 		2950E58225147E6300E7621C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2950E58425147E6300E7621C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2950E58925147E6400E7621C /* ChatApp-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ChatApp-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2950E58D25147E6400E7621C /* ChatApp_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatApp_iOSTests.swift; sourceTree = "<group>"; };
-		2950E58F25147E6400E7621C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2950E59425147E6400E7621C /* ChatApp-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ChatApp-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2950E59825147E6400E7621C /* ChatApp_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatApp_iOSUITests.swift; sourceTree = "<group>"; };
-		2950E59A25147E6400E7621C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2950E5C02514860400E7621C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2950E6152514A94A00E7621C /* SignUpLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpLoginViewController.swift; sourceTree = "<group>"; };
 		29ADFC742514E5E10070C1E5 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -109,8 +103,6 @@
 			isa = PBXGroup;
 			children = (
 				2950E57525147E6200E7621C /* ChatApp-iOS */,
-				2950E58C25147E6400E7621C /* ChatApp-iOSTests */,
-				2950E59725147E6400E7621C /* ChatApp-iOSUITests */,
 				2950E57425147E6200E7621C /* Products */,
 				87CC6E821243E16718D55A47 /* Pods */,
 				10290A4EE713FED8D179D234 /* Frameworks */,
@@ -138,24 +130,6 @@
 				2950E58425147E6300E7621C /* Info.plist */,
 			);
 			path = "ChatApp-iOS";
-			sourceTree = "<group>";
-		};
-		2950E58C25147E6400E7621C /* ChatApp-iOSTests */ = {
-			isa = PBXGroup;
-			children = (
-				2950E58D25147E6400E7621C /* ChatApp_iOSTests.swift */,
-				2950E58F25147E6400E7621C /* Info.plist */,
-			);
-			path = "ChatApp-iOSTests";
-			sourceTree = "<group>";
-		};
-		2950E59725147E6400E7621C /* ChatApp-iOSUITests */ = {
-			isa = PBXGroup;
-			children = (
-				2950E59825147E6400E7621C /* ChatApp_iOSUITests.swift */,
-				2950E59A25147E6400E7621C /* Info.plist */,
-			);
-			path = "ChatApp-iOSUITests";
 			sourceTree = "<group>";
 		};
 		2950E5AC251482FF00E7621C /* Controllers */ = {
@@ -408,7 +382,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2950E58E25147E6400E7621C /* ChatApp_iOSTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,7 +389,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2950E59925147E6400E7621C /* ChatApp_iOSUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
