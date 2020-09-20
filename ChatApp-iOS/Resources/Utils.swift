@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import NVActivityIndicatorView
 
 struct ChatAppUtility {
     
@@ -29,6 +28,14 @@ struct ChatAppUtility {
     static func defaultAppFont(weight: String = "", fontSize: CGFloat = UIFont.systemFontSize) -> UIFont {
         let font = UIFont(name: "Verdana\(weight)", size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
         return font
+    }
+    
+    static func getDate(dateStr: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.locale = Locale.current
+        return dateFormatter.date(from: dateStr)
     }
 }
 

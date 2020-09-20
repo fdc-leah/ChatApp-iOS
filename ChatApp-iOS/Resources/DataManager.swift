@@ -49,3 +49,60 @@ final class DataManager {
         })
     }
 }
+
+// MARK: - Inserting and loading message
+extension DataManager {
+    func sendMessageToConversation(message: Message, completion: @escaping((Bool) -> Void)) {
+        let newMessage = UserConversation.shared.createMessage(message: message)
+        let rf = database.child("conversations")
+        rf.observeSingleEvent(of: .value) { [weak self] (snap) in
+            guard var conversationNode = snap.value as? [[String:Any]] else {
+                self?.createConversation(with: newMessage) { (didSave) in
+                    completion(didSave)
+                }
+                return
+            }
+            conversationNode.append(newMessage)
+            rf.setValue(conversationNode) { (error, _) in
+                guard error == nil else {
+                    completion(false)
+                    return
+                }
+                completion(true)
+            }
+        }
+    }
+    
+    func createConversation(with param: [String:Any], completion: @escaping((Bool) -> Void)) {
+        database.child("conversations").setValue([param])
+        completion(true)
+    }
+    
+    func getAllConversation(completion: @escaping(Result<[Message],Error>) -> Void){
+        database.child("conversations").observe(.value) { (snap) in
+            guard let result = snap.value as? [[String: Any]] else {
+                completion(.failure(ChatAppError.notFound))
+                return
+            }
+            
+            let messages: [Message] = result.compactMap { (dictionary) in
+                guard let messageId = dictionary["message_id"] as? String ?? "",
+                      let username = dictionary["username"] as? String ?? "",
+                      let message = dictionary["message"] as? String ?? "",
+                      let dateSent = dictionary["date_sent"] as? String ?? "",
+                      let uid = dictionary["uid"] as? String ?? "" else {
+                    completion(.failure(ChatAppError.invalidResponse))
+                    return nil
+                }
+                return Message(sender: Sender(senderId: uid, displayName: username), messageId: messageId, sentDate: ChatAppUtility.getDate(dateStr: dateSent) ?? Date(), kind: .text(message))
+            }
+            completion(.success(messages))
+        }
+    }
+    /// use to get number of users from db user
+    func getNumberOfConversations(completion: @escaping((Int) -> Void)) {
+        database.child("conversations").observeSingleEvent(of: .value) { snap in
+            completion(Int(snap.childrenCount))
+        }
+    }
+}

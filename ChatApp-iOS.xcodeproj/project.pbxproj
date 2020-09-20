@@ -10,6 +10,8 @@
 		22DD266A1CBD49AF7A5D0636 /* Pods_ChatApp_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A62CF668128D634A82291D25 /* Pods_ChatApp_iOS.framework */; };
 		29507D3F2516050200F38835 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29507D3E2516050100F38835 /* GoogleService-Info.plist */; };
 		29507D56251614F100F38835 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29507D55251614F100F38835 /* DataManager.swift */; };
+		29507DA12517747C00F38835 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29507DA02517747C00F38835 /* UserData.swift */; };
+		29507DC225177C3300F38835 /* UserConversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29507DC125177C3300F38835 /* UserConversation.swift */; };
 		2950E57725147E6200E7621C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2950E57625147E6200E7621C /* AppDelegate.swift */; };
 		2950E57925147E6200E7621C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2950E57825147E6200E7621C /* SceneDelegate.swift */; };
 		2950E57B25147E6200E7621C /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2950E57A25147E6200E7621C /* ChatViewController.swift */; };
@@ -44,6 +46,8 @@
 /* Begin PBXFileReference section */
 		29507D3E2516050100F38835 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		29507D55251614F100F38835 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		29507DA02517747C00F38835 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		29507DC125177C3300F38835 /* UserConversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConversation.swift; sourceTree = "<group>"; };
 		2950E57325147E6200E7621C /* ChatApp-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ChatApp-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2950E57625147E6200E7621C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2950E57825147E6200E7621C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -128,7 +132,6 @@
 			children = (
 				29507D3E2516050100F38835 /* GoogleService-Info.plist */,
 				2950E5B02514836000E7621C /* Resources */,
-				2950E5AF2514833400E7621C /* ViewModels */,
 				2950E5AE2514832800E7621C /* Models */,
 				2950E5AD2514831A00E7621C /* Views */,
 				2950E5AC251482FF00E7621C /* Controllers */,
@@ -177,15 +180,11 @@
 		2950E5AE2514832800E7621C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				29ADFC792514EC570070C1E5 /* AppEnumsStruct.swift */,
+				29507DA02517747C00F38835 /* UserData.swift */,
+				29507DC125177C3300F38835 /* UserConversation.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		2950E5AF2514833400E7621C /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		2950E5B02514836000E7621C /* Resources */ = {
@@ -194,7 +193,6 @@
 				2950E57625147E6200E7621C /* AppDelegate.swift */,
 				2950E57825147E6200E7621C /* SceneDelegate.swift */,
 				29ADFC742514E5E10070C1E5 /* Utils.swift */,
-				29ADFC792514EC570070C1E5 /* AppEnumsStruct.swift */,
 				29507D55251614F100F38835 /* DataManager.swift */,
 			);
 			path = Resources;
@@ -398,8 +396,10 @@
 				2950E57B25147E6200E7621C /* ChatViewController.swift in Sources */,
 				29ADFC7A2514EC570070C1E5 /* AppEnumsStruct.swift in Sources */,
 				2950E57725147E6200E7621C /* AppDelegate.swift in Sources */,
+				29507DA12517747C00F38835 /* UserData.swift in Sources */,
 				29ADFC752514E5E10070C1E5 /* Utils.swift in Sources */,
 				2950E5C12514860400E7621C /* LoginViewController.swift in Sources */,
+				29507DC225177C3300F38835 /* UserConversation.swift in Sources */,
 				2950E57925147E6200E7621C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

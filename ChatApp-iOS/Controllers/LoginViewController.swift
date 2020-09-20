@@ -66,6 +66,9 @@ class LoginViewController: UIViewController {
         let vc = storyboard.instantiateViewController(withIdentifier: "loginVC") as! LoginViewController
         vc.modalPresentationStyle = .overCurrentContext
         vc.modalTransitionStyle = .crossDissolve
+        
+        // since register and login shares the same controller,
+        // set type to determine what type of controller is being used
         let signInType: SignInType = signinStruct!.signInType == .login ? .register : .login
         vc.signinStruct = SignInStruc(signInType: signInType)
         navigationVC.pushViewController(vc, animated: true)
@@ -127,12 +130,16 @@ class LoginViewController: UIViewController {
                     }
                     newSelf.displayLoadingScreen()
                     FirebaseAuth.Auth.auth().signIn(withEmail: email, password: passwordTxt) { (authResult, error) in
-                        guard authResult != nil, error == nil else {
+                        guard let res = authResult, error == nil else {
                             newSelf.checkError(error: error!)
                             newSelf.signInBtn.isUserInteractionEnabled = true
                             newSelf.dismiss(animated: true)
                             return
                         }
+                        UserData.shared.set(dictionary:
+                                                ["uid" : res.user.uid,
+                                                 "username": usernameTxt,
+                                                 "email" : res.user.email ?? ""])
                         newSelf.dismiss(animated: true) {
                             newSelf.redirectToConversation()
                         }
@@ -146,12 +153,13 @@ class LoginViewController: UIViewController {
     }
     
     func signUp(usernameTxt: String, passwordTxt: String) {
-        DataManager.shared.getNumberOfUsers { (count) in
+        DataManager.shared.getNumberOfUsers { [weak self] (count) in
+            guard let newSelf = self else {
+                return
+            }
             let newCount = count + 1
-            DataManager.shared.validateUser(with: usernameTxt) { [weak self] (exist) in
-                guard let newSelf = self else {
-                    return
-                }
+            newSelf.displayLoadingScreen()
+            DataManager.shared.validateUser(with: usernameTxt) { (exist) in
                 // - if user already exist,
                 // display error message on both field
                 if exist {
@@ -161,8 +169,8 @@ class LoginViewController: UIViewController {
                     // otherwise, create user
                     // since email is not being supplied by user,
                     // I make a default email
-                    newSelf.displayLoadingScreen()
-                    FirebaseAuth.Auth.auth().createUser(withEmail: "userMail\(newCount)@chatapp.com", password: passwordTxt) { authResult, error in
+                    let email = "userMail\(newCount)@chatapp.com"
+                    FirebaseAuth.Auth.auth().createUser(withEmail: email , password: passwordTxt) { authResult, error in
                         
                         guard let result = authResult, error == nil else {
                             newSelf.checkError(error: error!)
@@ -170,7 +178,12 @@ class LoginViewController: UIViewController {
                             newSelf.dismiss(animated: true)
                             return
                         }
-                        DataManager.shared.linkUsernameEmail(with: User(username: usernameTxt, email: result.user.email ?? "userMail\(newCount)@chatapp.com", uid: result.user.uid)) {
+                        DataManager.shared.linkUsernameEmail(with: User(username: usernameTxt, email: result.user.email ?? email, uid: result.user.uid)) {
+                            
+                            UserData.shared.set(dictionary:
+                                                    ["uid" : result.user.uid,
+                                                     "username": usernameTxt,
+                                                     "email" : email])
                             newSelf.dismiss(animated: true) {
                                 newSelf.redirectToConversation()
                             }
@@ -192,6 +205,7 @@ class LoginViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    // checking before query
     func checkError(error: Error) {
         if let err = error as NSError? {
             let errorType = AuthErrorType.getErrorType(code: err.code)

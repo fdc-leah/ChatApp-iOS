@@ -15,22 +15,32 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         if (FirebaseAuth.Auth.auth().currentUser == nil) {
-            //Make sure to do this else you won't get
-            //the windowScene object using UIApplication.shared.connectedScenes
-            self.window?.windowScene = windowScene
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "signupLogin")
-            let nav = UINavigationController(rootViewController: vc)
-            nav.setNavigationBarHidden(true, animated: false)
-            window?.rootViewController = nav
-            window?.makeKeyAndVisible()
+            UserData.shared.clear() { [weak self] in
+                guard let newSelf = self else {
+                    return
+                }
+                //Make sure to do this else you won't get
+                //the windowScene object using UIApplication.shared.connectedScenes
+                newSelf.window?.windowScene = windowScene
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "signupLogin")
+                let nav = UINavigationController(rootViewController: vc)
+                nav.setNavigationBarHidden(true, animated: false)
+                newSelf.window?.rootViewController = nav
+                newSelf.window?.makeKeyAndVisible()
+            }
         } else {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "chatVC")
-            let nav = UINavigationController(rootViewController: vc)
-            nav.setNavigationBarHidden(false, animated: false)
-            window?.rootViewController = nav
-            window?.makeKeyAndVisible()
+            UserData.shared.setInfoByDefault { [weak self] in
+                guard let newSelf = self else {
+                    return
+                }
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "chatVC")
+                let nav = UINavigationController(rootViewController: vc)
+                nav.setNavigationBarHidden(false, animated: false)
+                newSelf.window?.rootViewController = nav
+                newSelf.window?.makeKeyAndVisible()
+            }
         }
     }
 
