@@ -24,6 +24,11 @@ struct ChatAppUtility {
         view.layer.cornerRadius = cornerRadius;
         view.layer.masksToBounds = true
     }
+    
+    static func defaultAppFont(weight: String = "", fontSize: CGFloat = UIFont.systemFontSize) -> UIFont {
+        let font = UIFont(name: "Verdana\(weight)", size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
+        return font
+    }
 }
 
 struct SignInStruc {

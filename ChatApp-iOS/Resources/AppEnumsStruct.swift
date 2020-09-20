@@ -15,4 +15,10 @@ enum SignInType: Int {
 struct User {
     var username: String
     var email: String
+    var uid: String
+    var safeEmail: String {
+        var safeEmail = email.replacingOccurrences(of: ".", with: "-")
+        safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
+        return safeEmail
+    }
 }

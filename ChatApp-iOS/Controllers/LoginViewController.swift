@@ -19,6 +19,10 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var othersignInLink: UIButton!
     
     var signinStruct: SignInStruc?
+    
+    deinit {
+        debugPrint("LoginViewController deinit")
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Chat app"
@@ -28,12 +32,24 @@ class LoginViewController: UIViewController {
     
     @IBAction func selectSignIn(_ sender: UIButton) {
         sender.isUserInteractionEnabled = false
-        if shouldShowUsernameError(isFirstLoad: false) &&
-            shouldShowPasswordError(isFirstLoad: false) {
+        if shouldShowUsernameError() ||
+            shouldShowPasswordError() {
             sender.isUserInteractionEnabled = true
             return
         }
-        login(userName)
+        guard let data = signinStruct else {
+            sender.isUserInteractionEnabled = true
+            return
+        }
+        switch data.signInType {
+        case .login:
+            
+            break
+        case .register:
+            signUp(usernameTxt: userName.text ?? "",
+                   passwordTxt: password.text ?? "")
+            break
+        }
         
     }
     
@@ -53,7 +69,7 @@ class LoginViewController: UIViewController {
         
     }
     func shouldShowUsernameError(_ isAuthfailed: Bool = false) -> Bool {
-        if let usernameText = userName.text, !usernameText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || isAuthfailed {
+        if let usernameText = userName.text, !usernameText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && !isAuthfailed {
             usernameErrorLbl.text = ""
             usernameErrorLblHeight.constant = 0
             return false
@@ -64,7 +80,7 @@ class LoginViewController: UIViewController {
     }
     
     func shouldShowPasswordError(_ isAuthfailed: Bool = false) -> Bool {
-        if let passText = password.text, !passText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || isAuthfailed || (passText.count >= 6 && passText.count <= 16) {
+        if let passText = password.text, !passText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && !isAuthfailed && (passText.count >= 6 && passText.count <= 16) {
             passwordErrorLbl.text = ""
             passwordErrorLblHeight.constant = 0
             return false
@@ -82,36 +98,94 @@ class LoginViewController: UIViewController {
         ChatAppUtility.applyRoundedCorners(view: signInBtn, cornerRadius: 10)
         signInBtn.setTitle(data.buttonText(), for: .normal)
         othersignInLink.setAttributedTitle(data.linkAttributedLinkText(), for: .normal)
-        _ = shouldShowUsernameError()
-        _ = shouldShowPasswordError()
+        
+        passwordErrorLbl.text = ""
+        passwordErrorLblHeight.constant = 0
+        usernameErrorLbl.text = ""
+        usernameErrorLblHeight.constant = 0
     }
     
     func login(usernameTxt: String, passwordTxt: String) {
-    }
-    
-    func signUp(usernameTxt: String, passwordTxt: String) {
-        DataManager.shared.validateUser(with: passwordTxt) { [weak self] (exist) in
+        // - check first if user is existing,
+        // otherwise, display error
+        DataManager.shared.validateUser(with: usernameTxt) { [weak self] (exist) in
             guard let newSelf = self else {
                 return
             }
             // - if user already exist,
             // display error message on both field
             if exist {
-                _ = newSelf.shouldShowUsernameError(true)
-                _ = newSelf.shouldShowPasswordError(true)
-            } else {
-                // otherwise, create user
-                FirebaseAuth.Auth.auth().createUser(withEmail: usernameTxt, password: passwordTxt) { authResult, error in
-                    
-                    guard let result = authResult, error == nil else {
-                        debugPrint("error firebase login ")
+                DataManager.shared.retreiveEmail(with: usernameTxt) { (email) in
+                    if email.isEmpty {
+                        _ = newSelf.shouldShowUsernameError(true)
+                        newSelf.signInBtn.isUserInteractionEnabled = true
                         return
                     }
-                    
+                    FirebaseAuth.Auth.auth().signIn(withEmail: email, password: passwordTxt) { (authResult, error) in
+                        guard authResult != nil, error == nil else {
+                            _ = newSelf.shouldShowUsernameError(true)
+                            newSelf.signInBtn.isUserInteractionEnabled = true
+                            return
+                        }
+                        newSelf.redirectToConversation()
+                    }
+                }
+            } else {
+                _ = newSelf.shouldShowUsernameError(true)
+                newSelf.signInBtn.isUserInteractionEnabled = true
+            }
+        }
+    }
+    
+    func signUp(usernameTxt: String, passwordTxt: String) {
+        DataManager.shared.getNumberOfUsers { (count) in
+            let newCount = count + 1
+            DataManager.shared.validateUser(with: usernameTxt) { [weak self] (exist) in
+                guard let newSelf = self else {
+                    return
+                }
+                // - if user already exist,
+                // display error message on both field
+                if exist {
+                    _ = newSelf.shouldShowUsernameError(true)
+                    newSelf.signInBtn.isUserInteractionEnabled = true
+                } else {
+                    // otherwise, create user
+                    // since email is not being supplied by user,
+                    // I make a default email
+                    FirebaseAuth.Auth.auth().createUser(withEmail: "userMail\(newCount)@chatapp.com", password: passwordTxt) { authResult, error in
+                        
+                        guard let result = authResult, error == nil else {
+                            _ = newSelf.shouldShowUsernameError(true)
+                            newSelf.signInBtn.isUserInteractionEnabled = true
+                            return
+                        }
+                        DataManager.shared.insertUser(with: User(username: usernameTxt, email: result.user.email ?? "userMail\(newCount)@chatapp.com", uid: result.user.uid)) {
+                            FirebaseAuth.Auth.auth().signIn(withEmail: "userMail\(newCount)@chatapp.com", password: passwordTxt) { (authResult, error) in
+                                guard authResult != nil, error == nil else {
+                                    _ = newSelf.shouldShowUsernameError(true)
+                                    newSelf.signInBtn.isUserInteractionEnabled = true
+                                    return
+                                    
+                                }
+                                newSelf.redirectToConversation()
+                            }
+                        }
+                        
+                    }
                 }
             }
         }
         
+    }
+    
+    func redirectToConversation() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "chatVC") as! ChatViewController
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.modalTransitionStyle = .crossDissolve
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }

@@ -14,6 +14,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
+        do { try Auth.auth().signOut() }
+        catch { debugPrint("already logged out") }
         if (FirebaseAuth.Auth.auth().currentUser == nil) {
             //Make sure to do this else you won't get
             //the windowScene object using UIApplication.shared.connectedScenes
