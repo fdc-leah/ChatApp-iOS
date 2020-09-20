@@ -26,6 +26,9 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Chat app"
+        navigationController?.navigationBar.titleTextAttributes = [
+            .foregroundColor: UIColor.black,
+            .font : ChatAppUtility.defaultAppFont(weight: "-Bold", fontSize: 20)]
         navigationItem.setHidesBackButton(true, animated: true)
         setupView()
     }
@@ -43,7 +46,8 @@ class LoginViewController: UIViewController {
         }
         switch data.signInType {
         case .login:
-            
+            login(usernameTxt: userName.text ?? "",
+                   passwordTxt: password.text ?? "")
             break
         case .register:
             signUp(usernameTxt: userName.text ?? "",
@@ -113,7 +117,7 @@ class LoginViewController: UIViewController {
                 return
             }
             // - if user already exist,
-            // display error message on both field
+            // display error message on user field
             if exist {
                 DataManager.shared.retreiveEmail(with: usernameTxt) { (email) in
                     if email.isEmpty {
@@ -121,13 +125,17 @@ class LoginViewController: UIViewController {
                         newSelf.signInBtn.isUserInteractionEnabled = true
                         return
                     }
+                    newSelf.displayLoadingScreen()
                     FirebaseAuth.Auth.auth().signIn(withEmail: email, password: passwordTxt) { (authResult, error) in
                         guard authResult != nil, error == nil else {
-                            _ = newSelf.shouldShowUsernameError(true)
+                            newSelf.checkError(error: error!)
                             newSelf.signInBtn.isUserInteractionEnabled = true
+                            newSelf.dismiss(animated: true)
                             return
                         }
-                        newSelf.redirectToConversation()
+                        newSelf.dismiss(animated: true) {
+                            newSelf.redirectToConversation()
+                        }
                     }
                 }
             } else {
@@ -153,21 +161,17 @@ class LoginViewController: UIViewController {
                     // otherwise, create user
                     // since email is not being supplied by user,
                     // I make a default email
+                    newSelf.displayLoadingScreen()
                     FirebaseAuth.Auth.auth().createUser(withEmail: "userMail\(newCount)@chatapp.com", password: passwordTxt) { authResult, error in
                         
                         guard let result = authResult, error == nil else {
-                            _ = newSelf.shouldShowUsernameError(true)
+                            newSelf.checkError(error: error!)
                             newSelf.signInBtn.isUserInteractionEnabled = true
+                            newSelf.dismiss(animated: true)
                             return
                         }
-                        DataManager.shared.insertUser(with: User(username: usernameTxt, email: result.user.email ?? "userMail\(newCount)@chatapp.com", uid: result.user.uid)) {
-                            FirebaseAuth.Auth.auth().signIn(withEmail: "userMail\(newCount)@chatapp.com", password: passwordTxt) { (authResult, error) in
-                                guard authResult != nil, error == nil else {
-                                    _ = newSelf.shouldShowUsernameError(true)
-                                    newSelf.signInBtn.isUserInteractionEnabled = true
-                                    return
-                                    
-                                }
+                        DataManager.shared.linkUsernameEmail(with: User(username: usernameTxt, email: result.user.email ?? "userMail\(newCount)@chatapp.com", uid: result.user.uid)) {
+                            newSelf.dismiss(animated: true) {
                                 newSelf.redirectToConversation()
                             }
                         }
@@ -186,6 +190,25 @@ class LoginViewController: UIViewController {
         vc.modalTransitionStyle = .crossDissolve
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func checkError(error: Error) {
+        if let err = error as NSError? {
+            let errorType = AuthErrorType.getErrorType(code: err.code)
+            switch errorType {
+            case .username:
+                _ = shouldShowUsernameError(true)
+                break
+            case .password:
+                _ = shouldShowPasswordError(true)
+                break
+            case .generalError:
+                _ = shouldShowUsernameError(true)
+                _ = shouldShowPasswordError(true)
+                break
+            }
+        }
+        
     }
     
 }

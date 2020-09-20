@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ChatViewController: UIViewController {
     
@@ -15,7 +16,7 @@ class ChatViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupNaviBar()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -24,18 +25,31 @@ class ChatViewController: UIViewController {
 
     @objc func logoutUser(_ sender: UIBarButtonItem) {
         
+        do {
+            try Auth.auth().signOut()
+            showViewController(with: "signupLogin")
+        }catch {
+            debugPrint("already logged out")
+            showViewController(with: "signupLogin")
+            
+        }
     }
     
-    func setupRightButtonBar() {
+    func setupNaviBar() {
+        title = "Chat app"
+        navigationController?.navigationBar.titleTextAttributes = [
+            .foregroundColor: UIColor.black,
+            .font : ChatAppUtility.defaultAppFont(weight: "-Bold", fontSize: 20)]
+        
+        navigationItem.setHidesBackButton(true, animated: true)
         let linkAtrribute: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.init(hexString: "6C767E"),
-            .underlineStyle: NSUnderlineStyle.single.rawValue,
+            .foregroundColor: UIColor.white,
             .font : ChatAppUtility.defaultAppFont(fontSize: 14)]
             
         let attributedStr = NSMutableAttributedString(string: "Log out", attributes: linkAtrribute)
         
         // Add logout button on right bar
-        let btnLogout = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 25))
+        let btnLogout = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 25))
         btnLogout.setAttributedTitle(attributedStr, for: .normal)
         btnLogout.backgroundColor = UIColor(hexString: "666666")
         btnLogout.layer.cornerRadius = 4

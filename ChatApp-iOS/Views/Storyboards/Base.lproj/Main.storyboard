@@ -24,6 +24,24 @@
             </objects>
             <point key="canvasLocation" x="14" y="87"/>
         </scene>
+        <!--Activity Indicator View Controller-->
+        <scene sceneID="CCl-H8-fPi">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xkF-nx-ZaD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController id="RcQ-Kd-1W4" customClass="ActivityIndicatorViewController" customModule="ChatApp_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="m9s-ea-kId">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="3Yx-5M-psb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="activityView" destination="m9s-ea-kId" id="Gng-yM-5hr"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="754" y="86"/>
+        </scene>
         <!--Sign Up Login View Controller-->
         <scene sceneID="nRE-Nc-c9F">
             <objects>

@@ -14,8 +14,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        do { try Auth.auth().signOut() }
-        catch { debugPrint("already logged out") }
         if (FirebaseAuth.Auth.auth().currentUser == nil) {
             //Make sure to do this else you won't get
             //the windowScene object using UIApplication.shared.connectedScenes
@@ -24,6 +22,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let vc = storyboard.instantiateViewController(withIdentifier: "signupLogin")
             let nav = UINavigationController(rootViewController: vc)
             nav.setNavigationBarHidden(true, animated: false)
+            window?.rootViewController = nav
+            window?.makeKeyAndVisible()
+        } else {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "chatVC")
+            let nav = UINavigationController(rootViewController: vc)
+            nav.setNavigationBarHidden(false, animated: false)
             window?.rootViewController = nav
             window?.makeKeyAndVisible()
         }

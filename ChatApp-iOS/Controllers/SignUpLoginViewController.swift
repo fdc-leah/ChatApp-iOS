@@ -11,6 +11,10 @@ class SignUpLoginViewController: UIViewController {
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var signUpBtn: UIButton!
     
+    deinit {
+        debugPrint("deinit SignUpLoginViewController")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
