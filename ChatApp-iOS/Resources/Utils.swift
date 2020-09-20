@@ -25,8 +25,8 @@ struct ChatAppUtility {
         view.layer.masksToBounds = true
     }
     
-    static func defaultAppFont(weight: String = "", fontSize: CGFloat = UIFont.systemFontSize) -> UIFont {
-        let font = UIFont(name: "Verdana\(weight)", size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
+    static func defaultAppFont(weight: FontWeight = .regular, fontSize: CGFloat = UIFont.systemFontSize) -> UIFont {
+        let font = UIFont(name: "Verdana\(weight.rawValue)", size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
         return font
     }
     

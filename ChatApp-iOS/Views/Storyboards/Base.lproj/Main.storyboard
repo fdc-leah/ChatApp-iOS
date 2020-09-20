@@ -27,7 +27,6 @@
         <!--Activity Indicator View Controller-->
         <scene sceneID="CCl-H8-fPi">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xkF-nx-ZaD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="RcQ-Kd-1W4" customClass="ActivityIndicatorViewController" customModule="ChatApp_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="m9s-ea-kId">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -39,6 +38,7 @@
                         <outlet property="activityView" destination="m9s-ea-kId" id="Gng-yM-5hr"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xkF-nx-ZaD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="754" y="86"/>
         </scene>
@@ -61,7 +61,7 @@
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chat app" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSY-l4-wzx">
                                         <rect key="frame" x="0.0" y="122" width="245" height="58"/>
-                                        <fontDescription key="fontDescription" name="Kailasa-Bold" family="Kailasa" pointSize="35"/>
+                                        <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="35"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -85,7 +85,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0fx-Oa-mwM">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="52.5"/>
                                         <color key="backgroundColor" red="0.38039215686274508" green="0.63921568627450975" blue="0.031372549019607843" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="Kailasa-Bold" family="Kailasa" pointSize="22"/>
+                                        <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="22"/>
                                         <state key="normal" title="Sign up">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -96,7 +96,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V1I-s7-1ok">
                                         <rect key="frame" x="0.0" y="62.5" width="374" height="52.5"/>
                                         <color key="backgroundColor" red="0.53725490196078429" green="0.89411764705882346" blue="0.0078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="Kailasa-Bold" family="Kailasa" pointSize="22"/>
+                                        <fontDescription key="fontDescription" name="Verdana-BoldItalic" family="Verdana" pointSize="22"/>
                                         <state key="normal" title="Login">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>

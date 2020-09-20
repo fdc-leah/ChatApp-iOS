@@ -28,7 +28,7 @@ class LoginViewController: UIViewController {
         title = "Chat app"
         navigationController?.navigationBar.titleTextAttributes = [
             .foregroundColor: UIColor.black,
-            .font : ChatAppUtility.defaultAppFont(weight: "-Bold", fontSize: 20)]
+            .font : ChatAppUtility.defaultAppFont(weight: .bold, fontSize: 20)]
         navigationItem.setHidesBackButton(true, animated: true)
         setupView()
     }

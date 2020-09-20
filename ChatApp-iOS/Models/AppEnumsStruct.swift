@@ -26,6 +26,14 @@ enum ChatAppError: Error {
     case unsuppotedURL
  }
 
+// Default app font weight
+enum FontWeight: String {
+    case bold = "-Bold"
+    case regular = ""
+    case italic = "-Italic"
+    case boldItalic = "-BoldItalic"
+}
+
 
 // These error codes are Firebase codes grouped according to its description
 enum AuthErrorType {
@@ -62,6 +70,10 @@ struct Message: MessageType, Equatable {
     public var messageId: String
     public var sentDate: Date
     public var kind: MessageKind
+    
+    static func == (lhs: Message, rhs: Message) -> Bool {
+      return lhs.sentDate == rhs.sentDate
+    }
 }
 
 extension MessageKind {

@@ -61,7 +61,7 @@ class ChatViewController: MessagesViewController {
         title = "Chat app"
         navigationController?.navigationBar.titleTextAttributes = [
             .foregroundColor: UIColor.black,
-            .font : ChatAppUtility.defaultAppFont(weight: "-Bold", fontSize: 20)]
+            .font : ChatAppUtility.defaultAppFont(weight: .bold, fontSize: 20)]
         
         navigationItem.setHidesBackButton(true, animated: true)
         let linkAtrribute: [NSAttributedString.Key: Any] = [
